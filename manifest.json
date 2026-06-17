@@ -1,0 +1,21 @@
+{
+  "short_name": "Bijuterii",
+  "name": "Bijuterii Handmade & Mărturii",
+  "icons": [
+    {
+      "src": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=192&auto=format&fit=crop",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=512&auto=format&fit=crop",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "./index.html",
+  "background_color": "#fff1f2",
+  "theme_color": "#e11d48",
+  "display": "standalone",
+  "orientation": "portrait"
+}

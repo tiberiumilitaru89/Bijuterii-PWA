@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="ro" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="theme-color" content="#e11d48" />
+  <title>Bijuterii & Mărturii – Pietre Semiprețioase</title>
+  <link rel="manifest" href="manifest.json" />
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Bijuterii">
+  <link rel="apple-touch-icon"
+    href="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=192&auto=format&fit=crop">
+
+  <script>
+    const isPWA = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    const meta = document.createElement('meta');
+    meta.name = "viewport";
+
+    if (isPWA) {
+      // Când e instalat ca PWA, se vede ca o aplicație mobilă optimizată
+      meta.content = "width=device-width, initial-scale=1.0";
+    } else {
+      // Când se deschide simplu în browser pe telefon, forțează layout-ul de PC (rezoluție de monitor)
+      meta.content = "width=1280, initial-scale=0.3, maximum-scale=3.0, user-scalable=yes";
+    }
+    document.getElementsByTagName('head')[0].appendChild(meta);
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+    rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            brand: {
+              50: '#fff1f2',
+              100: '#ffe4e6',
+              200: '#fecdd3',
+              300: '#fda4af',
+              400: '#fb7185',
+              500: '#f43f5e',
+              600: '#e11d48',
+              700: '#be123c',
+              deep: '#4c0519',
+              gold: '#d4af37',
+              goldhover: '#c59b27',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Ambient animated background circles */
+    .ambient-glow-1 {
+      position: fixed;
+      top: -10%;
+      left: -10%;
+      width: 50vw;
+      height: 50vw;
+      background: radial-gradient(circle, rgba(253, 164, 175, 0.15) 0%, rgba(244, 63, 94, 0.05) 50%, rgba(255, 255, 255, 0) 100%);
+      filter: blur(80px);
+      z-index: -1;
+      animation: float-slow 25s ease-in-out infinite alternate;
+    }
+
+    .ambient-glow-2 {
+      position: fixed;
+      bottom: -10%;
+      right: -10%;
+      width: 60vw;
+      height: 60vw;
+      background: radial-gradient(circle, rgba(251, 113, 133, 0.12) 0%, rgba(190, 18, 60, 0.04) 50%, rgba(255, 255, 255, 0) 100%);
+      filter: blur(100px);
+      z-index: -1;
+      animation: float-slow 30s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes float-slow {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate(5%, 8%) scale(1.1);
+      }
+
+      100% {
+        transform: translate(-3%, -5%) scale(0.9);
+      }
+    }
+
+    /* Chat widget adaptiv pentru a nu bloca ecranul pe mobil */
+    .chat-widget {
+      width: 350px;
+      max-width: 90vw;
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+    }
+
+    @media (max-width: 480px) {
+      .chat-widget {
+        max-width: 85vw;
+        bottom: 16px;
+        right: 16px;
+      }
+
+      .chat-body {
+        height: 250px;
+      }
+    }
+
+    .chat-header {
+      background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+      color: #fff;
+      padding: 14px 16px;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+    }
+
+    .chat-body {
+      height: 320px;
+      overflow: auto;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 14px;
+    }
+
+    .chat-input {
+      display: flex;
+      gap: 8px;
+      padding: 12px;
+      background: rgba(248, 250, 252, 0.95);
+      border-bottom-left-radius: 16px;
+      border-bottom-right-radius: 16px;
+    }
+
+    .msg {
+      margin: 8px 0;
+      padding: 10px 14px;
+      border-radius: 18px;
+      max-width: 85%;
+      font-size: 0.925rem;
+      line-height: 1.4;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    .msg.user {
+      background: #fecdd3;
+      color: #4c0519;
+      margin-left: auto;
+      border-bottom-right-radius: 4px;
+    }
+
+    .msg.bot {
+      background: #f1f5f9;
+      color: #1e293b;
+      border-bottom-left-radius: 4px;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50/70 text-slate-800 relative min-h-screen overflow-x-hidden antialiased">
+  <div class="ambient-glow-1"></div>
+  <div class="ambient-glow-2"></div>
+
+  <header class="glass-card shadow-sm fixed w-full z-50 transition-all duration-300">
+    <nav class="container mx-auto flex justify-between items-center p-4">
+      <a href="#acasa" class="flex items-center gap-2 group">
+        <span class="text-2xl">✨</span>
+        <span
+          class="text-xl font-bold tracking-wide bg-gradient-to-r from-brand-600 via-rose-500 to-amber-600 bg-clip-text text-transparent">
+          Bijuterii Handmade
+        </span>
+      </a>
+
+      <ul class="hidden md:flex gap-8 items-center font-medium text-slate-600">
+        <li><a href="#acasa" class="hover:text-brand-600 transition-colors">Acasă</a></li>
+        <li><a href="#prezentare" class="hover:text-brand-600 transition-colors">Despre Mine</a></li>
+        <li><a href="#servicii" class="hover:text-brand-600 transition-colors">Servicii</a></li>
+        <li><a href="#magazin" class="hover:text-brand-600 transition-colors">Magazin</a></li>
+        <li><a href="#recenzii" class="hover:text-brand-600 transition-colors">Recenzii</a></li>
+        <li>
+          <button id="pwaHeaderBtn"
+            class="hidden px-4 py-2 bg-amber-100 hover:bg-amber-200 text-amber-800 rounded-full text-sm font-semibold transition-all hover:scale-105 active:scale-95">
+            📲 Instalează App
+          </button>
+        </li>
+        <li>
+          <a href="#contact"
+            class="px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-full transition-all duration-300 shadow-md hover:shadow-brand-500/20 hover:scale-105">
+            Contact
+          </a>
+        </li>
+      </ul>
+
+      <button id="mobileMenuBtn" class="md:hidden p-2 text-slate-700 focus:outline-none" aria-label="Deschide meniu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </nav>
+
+    <div id="mobileMenu"
+      class="hidden md:hidden border-t border-slate-100 bg-white/95 backdrop-blur-md px-6 py-4 space-y-3 shadow-inner">
+      <a href="#acasa" class="block py-2 font-medium text-slate-600 hover:text-brand-600">Acasă</a>
+      <a href="#prezentare" class="block py-2 font-medium text-slate-600 hover:text-brand-600">Despre Mine</a>
+      <a href="#servicii" class="block py-2 font-medium text-slate-600 hover:text-brand-600">Servicii</a>
+      <a href="#magazin" class="block py-2 font-medium text-slate-600 hover:text-brand-600">Magazin</a>
+      <a href="#recenzii" class="block py-2 font-medium text-slate-600 hover:text-brand-600">Recenzii</a>
+      <button id="pwaMobileBtn"
+        class="hidden w-full text-center py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-full font-medium shadow-md transition-all active:scale-95">
+        📲 Instalează Aplicația
+      </button>
+      <a href="#contact"
+        class="block text-center py-2.5 bg-brand-600 text-white rounded-full font-medium shadow-md hover:bg-brand-700">
+        Contact
+      </a>
+    </div>
+  </header>
+
+  <main class="pt-24">
+    <section id="acasa" class="pt-16 pb-20 md:py-32 relative">
+      <div class="container mx-auto text-center max-w-4xl px-4">
+        <span
+          class="inline-block px-4 py-1.5 bg-rose-100/60 text-brand-700 rounded-full font-semibold text-xs tracking-wider uppercase mb-6 backdrop-blur-sm">
+          Colecție Unică Handmade
+        </span>
+        <h2 class="text-4xl md:text-6xl font-bold font-serif mb-6 leading-tight text-slate-900">
+          Bijuterii și Mărturii din <br class="hidden md:inline" />
+          <span class="bg-gradient-to-r from-brand-600 via-rose-500 to-amber-500 bg-clip-text text-transparent">Pietre
+            Semiprețioase</span>
+        </h2>
+        <p class="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+          Fiecare creație este realizată manual, îmbinând frumusețea naturală a mineralelor cu energia lor subtilă
+          pentru a crea accesorii cu totul deosebite.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <a href="#magazin"
+            class="w-full sm:w-auto px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white font-medium rounded-full shadow-lg shadow-brand-500/20 text-center">
+            Vezi Colecția
+          </a>
+          <button id="pwaHeroBtn"
+            class="hidden w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-semibold rounded-full shadow-lg text-center flex items-center justify-center gap-2">
+            📲 Instalează Aplicația
+          </button>
+          <a href="#prezentare"
+            class="w-full sm:w-auto px-8 py-4 bg-white hover:bg-slate-50 text-slate-700 font-medium rounded-full border border-slate-200 text-center shadow-sm">
+            Află Povestea
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="prezentare" class="py-20 bg-white/40 backdrop-blur-sm border-y border-slate-100">
+      <div class="container mx-auto max-w-6xl px-4">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="relative group">
+            <div
+              class="absolute -inset-2 bg-gradient-to-r from-brand-200 to-amber-200 rounded-2xl blur-xl opacity-30 transition duration-500">
+            </div>
+            <img src="poza-doamna.jpg"
+              class="relative rounded-2xl shadow-xl w-full object-cover max-h-[480px] border border-slate-100"
+              alt="Artizan"
+              onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop'" />
+          </div>
+          <div class="space-y-6">
+            <span class="text-brand-600 font-bold tracking-wider uppercase text-sm">Făcut cu dragoste</span>
+            <h3 class="text-3xl md:text-4xl font-bold font-serif text-slate-900">Despre mine</h3>
+            <p class="text-slate-600 leading-relaxed text-lg">
+              Realizez bijuterii și mărturii unicat, personalizate integral din pietre semiprețioase autentice. Fiecare
+              piesă este încărcată cu intenții pozitive și gândită să completeze stilul tău personal sau să devină
+              cadoul perfect pentru cei dragi.
+            </p>
+            <div class="p-6 rounded-2xl bg-amber-50/60 border border-amber-100 space-y-2">
+              <p class="text-amber-900 font-medium text-sm">Doriți consultanță personalizată sau comenzi speciale?</p>
+              <p class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                <span>📞 Sunați la:</span>
+                <a href="tel:+40770123456"
+                  class="text-brand-600 hover:text-brand-700 underline underline-offset-4 decoration-2">0770 123 456</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicii" class="py-20">
+      <div class="container mx-auto max-w-6xl text-center px-4">
+        <span class="text-brand-600 font-bold tracking-wider uppercase text-sm">Ce oferim</span>
+        <h3 class="text-3xl md:text-4xl font-bold font-serif mt-2 mb-12 text-slate-900">Servicii Personalizate</h3>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div
+            class="p-8 bg-white/70 backdrop-blur-md rounded-3xl shadow-sm border border-slate-100/50 text-left space-y-4">
+            <div class="w-12 h-12 bg-rose-100 rounded-2xl flex items-center justify-center text-2xl">🎁</div>
+            <h4 class="font-bold text-xl text-slate-800">Mărturii Evenimente</h4>
+            <p class="text-slate-600 leading-relaxed">Cadouri personalizate, deosebite pentru botez, nuntă sau cununie
+              civilă, adaptate tematicii tale.</p>
+          </div>
+          <div
+            class="p-8 bg-white/70 backdrop-blur-md rounded-3xl shadow-sm border border-slate-100/50 text-left space-y-4">
+            <div class="w-12 h-12 bg-amber-100 rounded-2xl flex items-center justify-center text-2xl">✨</div>
+            <h4 class="font-bold text-xl text-slate-800">Bijuterii Handmade</h4>
+            <p class="text-slate-600 leading-relaxed">Brățări, lănțișoare, cercei și seturi asortate, create manual din
+              cele mai fine minerale.</p>
+          </div>
+          <div
+            class="p-8 bg-white/70 backdrop-blur-md rounded-3xl shadow-sm border border-slate-100/50 text-left space-y-4">
+            <div class="w-12 h-12 bg-purple-100 rounded-2xl flex items-center justify-center text-2xl">💎</div>
+            <h4 class="font-bold text-xl text-slate-800">Personalizare Energetică</h4>
+            <p class="text-slate-600 leading-relaxed">Alegem pietrele în funcție de inițiale, zodia ta, culorile dorite
+              și proprietățile lor energetice.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="magazin" class="py-20 bg-white/40 backdrop-blur-sm border-t border-slate-100">
+      <div class="container mx-auto max-w-6xl text-center px-4">
+        <span class="text-brand-600 font-bold tracking-wider uppercase text-sm">Produse populare</span>
+        <h3 class="text-3xl md:text-4xl font-bold font-serif mt-2 mb-12 text-slate-900">Magazin de Bijuterii</h3>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div
+            class="bg-white/80 backdrop-blur-md rounded-3xl overflow-hidden shadow-sm border border-slate-100/50 flex flex-col group">
+            <div class="relative overflow-hidden aspect-square">
+              <img src="produs1.jpg"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                alt="Brățară Ametist"
+                onerror="this.src='https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=500&auto=format&fit=crop'" />
+              <span
+                class="absolute top-4 left-4 bg-purple-100 text-purple-800 text-xs font-semibold px-3 py-1 rounded-full uppercase">Piatră
+                Spirituală</span>
+            </div>
+            <div class="p-6 flex-1 flex flex-col justify-between text-left space-y-4">
+              <div>
+                <h4 class="font-bold text-lg text-slate-800">Brățară Ametist</h4>
+                <p class="text-slate-500 text-sm mt-1">Realizată cu mărgele de ametist natural de 8mm.</p>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-brand-600 font-bold text-xl">45 lei</span>
+                <button data-name="Brățară Ametist" data-price="45"
+                  class="order-btn px-6 py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-medium rounded-full shadow-sm">Comandă</button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="bg-white/80 backdrop-blur-md rounded-3xl overflow-hidden shadow-sm border border-slate-100/50 flex flex-col group">
+            <div class="relative overflow-hidden aspect-square">
+              <img src="produs2.jpg"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                alt="Brățară Onix"
+                onerror="this.src='https://images.unsplash.com/photo-1611085583191-a3b1a30a8a3a?q=80&w=500&auto=format&fit=crop'" />
+              <span
+                class="absolute top-4 left-4 bg-slate-900 text-white text-xs font-semibold px-3 py-1 rounded-full uppercase">Protecție</span>
+            </div>
+            <div class="p-6 flex-1 flex flex-col justify-between text-left space-y-4">
+              <div>
+                <h4 class="font-bold text-lg text-slate-800">Brățară Onix</h4>
+                <p class="text-slate-500 text-sm mt-1">Brățară masculină/feminină din onix negru mat.</p>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-brand-600 font-bold text-xl">40 lei</span>
+                <button data-name="Brățară Onix" data-price="40"
+                  class="order-btn px-6 py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-medium rounded-full shadow-sm">Comandă</button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="bg-white/80 backdrop-blur-md rounded-3xl overflow-hidden shadow-sm border border-slate-100/50 flex flex-col group">
+            <div class="relative overflow-hidden aspect-square">
+              <img src="produs3.jpg"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                alt="Lănțișor Quartz Roz"
+                onerror="this.src='https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=500&auto=format&fit=crop'" />
+              <span
+                class="absolute top-4 left-4 bg-rose-100 text-rose-800 text-xs font-semibold px-3 py-1 rounded-full uppercase">Piatra
+                Iubirii</span>
+            </div>
+            <div class="p-6 flex-1 flex flex-col justify-between text-left space-y-4">
+              <div>
+                <h4 class="font-bold text-lg text-slate-800">Lănțișor Quartz Roz</h4>
+                <p class="text-slate-500 text-sm mt-1">Lănțișor delicat cu pandantiv din quartz roz.</p>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-brand-600 font-bold text-xl">55 lei</span>
+                <button data-name="Lănțișor Quartz Roz" data-price="55"
+                  class="order-btn px-6 py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-medium rounded-full shadow-sm">Comandă</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="recenzii" class="py-20">
+      <div class="container mx-auto max-w-6xl px-4">
+        <div class="text-center mb-12">
+          <span class="text-brand-600 font-bold tracking-wider uppercase text-sm">Gânduri bune</span>
+          <h3 class="text-3xl md:text-4xl font-bold font-serif mt-2 text-slate-900">Ce spun clienții</h3>
+        </div>
+
+        <div id="reviewsList" class="grid md:grid-cols-3 gap-8 mb-16">
+          <div
+            class="bg-white/70 backdrop-blur-md shadow-sm p-8 rounded-3xl border border-slate-100/50 flex flex-col justify-between space-y-4">
+            <p class="text-slate-600 italic leading-relaxed">"Brățările sunt superbe, finisajele sunt perfecte și se
+              simte calitatea pietrelor. Recomand!"</p>
+            <p class="font-bold text-slate-800 flex items-center gap-2"><span
+                class="inline-block w-6 h-0.5 bg-brand-500"></span> Andreea</p>
+          </div>
+          <div
+            class="bg-white/70 backdrop-blur-md shadow-sm p-8 rounded-3xl border border-slate-100/50 flex flex-col justify-between space-y-4">
+            <p class="text-slate-600 italic leading-relaxed">"Calitate excelentă a cristalelor și o livrare neașteptat
+              de rapidă. Excelent ca idee de cadou."</p>
+            <p class="font-bold text-slate-800 flex items-center gap-2"><span
+                class="inline-block w-6 h-0.5 bg-brand-500"></span> Ioana</p>
+          </div>
+          <div
+            class="bg-white/70 backdrop-blur-md shadow-sm p-8 rounded-3xl border border-slate-100/50 flex flex-col justify-between space-y-4">
+            <p class="text-slate-600 italic leading-relaxed">"Am comandat mărturii pentru botez, toți invitații au fost
+              încântați. Mulțumim!"</p>
+            <p class="font-bold text-slate-800 flex items-center gap-2"><span
+                class="inline-block w-6 h-0.5 bg-brand-500"></span> Marius</p>
+          </div>
+        </div>
+
+        <div class="max-w-lg mx-auto bg-white/80 backdrop-blur-md p-8 shadow-md rounded-3xl border border-slate-100/50">
+          <h4 class="text-xl font-bold text-center text-slate-800 mb-6 font-serif">Lasă-ne o recenzie</h4>
+          <form id="reviewForm" class="space-y-4">
+            <input id="reviewName" type="text" placeholder="Numele tău"
+              class="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-full text-sm" required />
+            <textarea id="reviewText" placeholder="Mesajul tău..." rows="4"
+              class="w-full p-4 bg-slate-50 border border-slate-200 rounded-3xl text-sm" required></textarea>
+            <button class="w-full bg-brand-600 text-white font-medium py-3.5 rounded-full">Trimite recenzie</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-white/40 backdrop-blur-sm border-t border-slate-100">
+      <div class="container mx-auto text-center max-w-4xl px-4">
+        <span class="text-brand-600 font-bold tracking-wider uppercase text-sm">Hai să vorbim</span>
+        <h3 class="text-3xl md:text-4xl font-bold font-serif mt-2 mb-4 text-slate-900">Contact</h3>
+        <p class="text-slate-600 mb-2">Telefon: <strong><a href="tel:+40770123456"
+              class="text-brand-600 hover:underline">0770 123 456</a></strong></p>
+        <p class="mb-10 text-slate-500 text-sm max-w-md mx-auto">Puteți face programări și comenzi direct telefonic,
+          prin WhatsApp sau completând formularul de mai jos.</p>
+
+        <form id="contactForm"
+          class="max-w-lg mx-auto bg-white/80 backdrop-blur-md p-8 shadow-md rounded-3xl border border-slate-100/50 space-y-4 text-left">
+          <div>
+            <label for="contactName"
+              class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 ml-4">Nume</label>
+            <input id="contactName" type="text" placeholder="Introdu numele tău"
+              class="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-full text-sm" required />
+          </div>
+          <div>
+            <label for="contactEmail"
+              class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 ml-4">Email</label>
+            <input id="contactEmail" type="email" placeholder="Adresa de email"
+              class="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-full text-sm" />
+          </div>
+          <div>
+            <label for="contactMessage"
+              class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 ml-4">Mesaj</label>
+            <textarea id="contactMessage" placeholder="Cum te putem ajuta?" rows="4"
+              class="w-full p-4 bg-slate-50 border border-slate-200 rounded-3xl text-sm" required></textarea>
+          </div>
+          <button class="w-full bg-brand-600 text-white font-medium py-3.5 rounded-full">Trimite mesaj</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <div id="orderModal"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm px-4 hidden">
+    <div class="bg-white w-full max-w-md rounded-3xl shadow-xl p-8 border border-slate-100 flex flex-col space-y-6">
+      <h4 class="text-2xl font-bold font-serif text-slate-900">Comandă produs</h4>
+      <form id="orderForm" class="space-y-4">
+        <div class="space-y-1">
+          <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider ml-3">Produs</label>
+          <input id="productName" readonly
+            class="w-full p-3.5 bg-slate-50 border border-slate-100 rounded-full text-slate-600 font-medium text-sm cursor-default" />
+        </div>
+        <div class="space-y-1">
+          <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider ml-3">Preț</label>
+          <input id="productPrice" readonly
+            class="w-full p-3.5 bg-slate-50 border border-slate-100 rounded-full text-brand-600 font-bold text-sm cursor-default" />
+        </div>
+        <div class="space-y-1">
+          <label class="text-xs font-semibold text-slate-500 uppercase tracking-wider ml-3">Nume complet</label>
+          <input id="orderName" type="text" placeholder="Ex: Popescu Maria"
+            class="w-full p-3.5 border border-slate-200 rounded-full text-sm" required />
+        </div>
+        <div class="space-y-1">
+          <label class="text-xs font-semibold text-slate-500 uppercase tracking-wider ml-3">Telefon</label>
+          <input id="orderPhone" type="tel" placeholder="Ex: 07xx xxx xxx"
+            class="w-full p-3.5 border border-slate-200 rounded-full text-sm" required />
+        </div>
+        <div class="space-y-1">
+          <label class="text-xs font-semibold text-slate-500 uppercase tracking-wider ml-3">Metodă plată</label>
+          <select id="paymentMethod" class="w-full p-3.5 border border-slate-200 bg-white rounded-full text-sm">
+            <option value="card">Plată cu cardul (simulare)</option>
+            <option value="cash">Plată la livrare (ramburs)</option>
+          </select>
+        </div>
+        <div class="flex gap-3 pt-4">
+          <button type="submit" class="flex-1 bg-brand-600 text-white font-medium py-3 rounded-full">Trimite
+            comandă</button>
+          <button type="button" id="closeOrder"
+            class="flex-1 bg-slate-100 text-slate-600 font-medium py-3 rounded-full">Anulează</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="chatWidget" class="fixed bottom-6 right-6 z-40 chat-widget">
+    <div id="chatCollapsed" class="flex justify-end">
+      <button id="openChat"
+        class="bg-brand-600 text-white p-4 rounded-full shadow-lg flex items-center justify-center gap-2 group">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+        </svg>
+        <span
+          class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 font-medium text-sm block">Asistent
+          Virtual</span>
+      </button>
+    </div>
+    <div id="chatOpen" class="hidden w-full shadow-2xl rounded-2xl overflow-hidden border border-slate-100">
+      <div class="chat-header flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-rose-500"></span>
+          </span>
+          <span class="font-semibold text-sm">Asistent Pietre Semiprețioase</span>
+        </div>
+        <button id="closeChat" class="text-white p-1 text-lg">✕</button>
+      </div>
+      <div id="chatBody" class="chat-body scroll-smooth"></div>
+      <div class="chat-input border-t border-slate-100">
+        <input id="chatInput" class="flex-1 p-2.5 bg-slate-50 border border-slate-200 rounded-full text-sm"
+          placeholder="Scrie mesaj..." />
+        <button id="sendChat"
+          class="px-4 py-2 bg-brand-600 text-white rounded-full text-sm font-medium">Trimite</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-10 text-center text-sm text-slate-500 border-t border-slate-100">
+    <div class="container mx-auto space-y-3 px-4">
+      <p class="font-semibold text-slate-800">✨ Bijuterii Handmade & Mărturii unicate</p>
+      <p>Telefon: <a href="tel:+40770123456" class="text-brand-600 hover:underline">0770 123 456</a></p>
+      <p class="text-xs text-slate-400">© 2026 Toate drepturile rezervate.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Navigation & Layout Logic
+    const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    mobileMenuBtn.addEventListener("click", () => { mobileMenu.classList.toggle("hidden"); });
+    mobileMenu.querySelectorAll("a").forEach(link => { link.addEventListener("click", () => { mobileMenu.classList.add("hidden"); }); });
+
+    window.addEventListener("scroll", () => {
+      const header = document.querySelector("header");
+      if (window.scrollY > 20) {
+        header.classList.add("shadow-md", "bg-white/95");
+      } else {
+        header.classList.remove("shadow-md", "bg-white/95");
+      }
+    });
+
+    // Modal Logic
+    document.querySelectorAll(".order-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.getElementById("productName").value = btn.dataset.name;
+        document.getElementById("productPrice").value = btn.dataset.price + " lei";
+        document.getElementById("orderModal").classList.remove("hidden");
+      });
+    });
+    document.getElementById("closeOrder").addEventListener("click", () => { document.getElementById("orderModal").classList.add("hidden"); });
+    window.addEventListener("keydown", (e) => { if (e.key === "Escape") document.getElementById("orderModal").classList.add("hidden"); });
+
+    document.getElementById("orderForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      alert("Comandă recepționată în sistemul demo!");
+      document.getElementById("orderModal").classList.add("hidden");
+      e.target.reset();
+    });
+
+    // Chatbot Logic
+    const botReplies = (msg) => {
+      msg = msg.toLowerCase();
+      if (msg.includes("preț") || msg.includes("cost")) return "Prețurile încep de la 40 lei. Ce model te interesează în mod special?";
+      if (msg.includes("brățar")) return "Avem brățări din Ametist (45 lei) și Onix (40 lei). Toate sunt lucrate manual.";
+      if (msg.includes("livrare") || msg.includes("curier")) return "Livrăm rapid prin curier în toată țara, sau ridicare personală din atelier.";
+      return "Bună! Te pot ajuta cu detalii despre materiale, prețuri sau procesul de livrare a bijuteriilor.";
+    };
+
+    const chatBody = document.getElementById("chatBody");
+    const appendMsg = (text, who = "bot") => {
+      const d = document.createElement("div");
+      d.className = "msg " + (who === "user" ? "user" : "bot");
+      d.textContent = text;
+      chatBody.appendChild(d);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    };
+
+    document.getElementById("openChat").addEventListener("click", () => {
+      document.getElementById("chatCollapsed").classList.add("hidden");
+      document.getElementById("chatOpen").classList.remove("hidden");
+      if (chatBody.children.length === 0) appendMsg("Bună! Cum te pot ajuta astăzi?");
+    });
+    document.getElementById("closeChat").addEventListener("click", () => {
+      document.getElementById("chatOpen").classList.add("hidden");
+      document.getElementById("chatCollapsed").classList.remove("hidden");
+    });
+    document.getElementById("sendChat").addEventListener("click", () => {
+      const v = document.getElementById("chatInput").value.trim();
+      if (!v) return;
+      appendMsg(v, "user");
+      setTimeout(() => appendMsg(botReplies(v), "bot"), 400);
+      document.getElementById("chatInput").value = "";
+    });
+    document.getElementById("chatInput").addEventListener("keydown", (e) => { if (e.key === "Enter") document.getElementById("sendChat").click(); });
+
+    // Service Worker & PWA Core Setup
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('Service Worker Active:', reg.scope))
+          .catch(err => console.error('Service Worker Error:', err));
+      });
+    }
+
+    let deferredPrompt;
+    const pwaHeroBtn = document.getElementById('pwaHeroBtn');
+    const pwaHeaderBtn = document.getElementById('pwaHeaderBtn');
+    const pwaMobileBtn = document.getElementById('pwaMobileBtn');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      if (pwaHeroBtn) pwaHeroBtn.classList.remove('hidden');
+      if (pwaHeaderBtn) pwaHeaderBtn.classList.remove('hidden');
+      if (pwaMobileBtn) pwaMobileBtn.classList.remove('hidden');
+    });
+
+    const handleInstall = async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      console.log(`User intent: ${outcome}`);
+      deferredPrompt = null;
+      [pwaHeroBtn, pwaHeaderBtn, pwaMobileBtn].forEach(btn => btn && btn.classList.add('hidden'));
+    };
+
+    if (pwaHeroBtn) pwaHeroBtn.addEventListener('click', handleInstall);
+    if (pwaHeaderBtn) pwaHeaderBtn.addEventListener('click', handleInstall);
+    if (pwaMobileBtn) pwaMobileBtn.addEventListener('click', handleInstall);
+  </script>
+</body>
+
+</html>
